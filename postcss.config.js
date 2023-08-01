@@ -4,6 +4,7 @@ module.exports = {
     require('cssnano'),
     require('postcss-assets')({
       loadPaths: ['public/assets'],
+      relative: true,
     }),
   ],
 };
