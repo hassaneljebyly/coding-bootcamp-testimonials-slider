@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- css -->
+    <link rel="stylesheet" href="./styles/style.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+
+    <title>Frontend Mentor | Coding Bootcamp Testimonials Slider</title>
+  </head>
+
+  <body class="ff-p">
+    <main>
+      <section class="testimonials">
+        <div class="container">
+          <div class="testimonials__carousel | flow">
+            <div id="testimonials__media" class="testimonials__media">
+              <div class="testimonials__img-wrapper">
+                <img src="./assets/image-tanya.jpg" class="testimonials__img active"
+                  data-image-quote="testimonials__content--1" alt="picture of tanya">
+                <img src="./assets/image-john.jpg" class="testimonials__img" data-image-quote="testimonials__content--2"
+                  alt="picture of john">
+              </div>
+              <div class="testimonials__controls">
+                <button class="testimonials__button testimonials__button--previous">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="18">
+                    <path fill="none" stroke="#8585AC" stroke-width="3" d="M11 1L3 9l8 8" />
+                  </svg>
+                  <span class="sr-only">previous slide</span>
+                </button>
+                <button class="testimonials__button testimonials__button--next">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="18">
+                    <path fill="none" stroke="#8585AC" stroke-width="3" d="M2 1l8 8-8 8" />
+                  </svg>
+                  <span class="sr-only">next slide</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="testimonials__body" class="testimonials__body">
+              <div class="testimonials__body-wrapper">
+                <div class="testimonials__content testimonials__content--1 active | flow">
+                  <p class="testimonials__text | fs-p-400 fw-p-light text-p-800">
+                    “I’ve been interested in coding for a while but never taken the jump, until now.
+                    I couldn’t recommend this course enough. I’m now in the job of my dreams and so
+                    excited about the future.”
+                  </p>
+                  <p class="testimonials__info">
+                    <span class="testimonials__name | fs-p-300 fw-p-bold text-p-800">Tanya Sinclair</span>
+                    <span class="testimonials__position | fs-p-300 fw-p-medium text-s-300">UX Engineer</span>
+                  </p>
+                </div>
+                <div class="testimonials__content testimonials__content--2 | flow">
+                  <p class="testimonials__text | fs-p-400 fw-p-light text-p-800">
+                    “If you want to lay the best foundation possible I’d recommend taking this course.
+                    The depth the instructors go into is incredible. I now feel so confident about
+                    starting up as a professional developer.”
+                  </p>
+                  <p class="testimonials__info">
+                    <span class="testimonials__name | fs-p-300 fw-p-bold text-p-800">John Tarkpor</span>
+                    <span class="testimonials__position | fs-p-300 fw-p-medium text-s-300">Junior Front-end
+                      Developer</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const TESTIMONIALS_BODY = document.getElementById("testimonials__body");
+      const TESTIMONIALS_MEDIA = document.getElementById("testimonials__media");
+
+      // parent of absolute positioned div must have a height 
+      let testimonialsMediaHeight = getComputedStyle(TESTIMONIALS_MEDIA).height;
+      TESTIMONIALS_BODY.style = `--testimonials__media-height: ${testimonialsMediaHeight}`
+      window.addEventListener("resize", () => {
+        testimonialsMediaHeight = getComputedStyle(TESTIMONIALS_MEDIA).height;
+        TESTIMONIALS_BODY.style = `--testimonials__media-height: ${testimonialsMediaHeight}`
+      });
+
+
+      const PREV_BTN = document.getElementsByClassName("testimonials__button--previous")[0];
+      const NEXT_BTN = document.getElementsByClassName("testimonials__button--next")[0];
+      const TESTIMONIALS_IMG = document.querySelectorAll(".testimonials__img");
+      const TESTIMONIALS_CONTENT = document.querySelectorAll(".testimonials__content");
+
+      let step = 0;
+      let sliderSize = TESTIMONIALS_IMG.length;
+      PREV_BTN.addEventListener("click", () => {
+        step <= 0 ? step = sliderSize - 1 : step--;
+        activateSlider(step);
+      });
+
+      NEXT_BTN.addEventListener("click", () => {
+        step >= sliderSize - 1 ? step = 0 : step++;
+        activateSlider(step);
+      });
+
+      function activateSlider(step) {
+        TESTIMONIALS_IMG.forEach((img, index) => {
+
+          // set aria attributes, false when active 
+          img.setAttribute("aria-hidden", step != index);
+          TESTIMONIALS_CONTENT[index].setAttribute("aria-hidden", step != index);
+          // remove active class from all but the current "step"
+          if (step === index) {
+            img.classList.add("active");
+            TESTIMONIALS_CONTENT[index].classList.add("active");
+          } else {
+            img.classList.remove("active");
+            TESTIMONIALS_CONTENT[index].classList.remove("active");
+          }
+        });
+      }
+    </script>
+  </body>
+
+</html>
