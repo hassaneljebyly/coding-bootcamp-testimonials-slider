@@ -28,8 +28,8 @@ Users should be able to:
 
 ### Links
 
-- Solution: [Solution](https://www.frontendmentor.io/solutions/coding-bootcamp-testimonials-slider-scss-javascript-postcss-ZoEh67LMIf)
-- Live Site: [Live Site](https://hassaneljebyly.github.io/coding-bootcamp-testimonials-slider/public/)
+- [Solution](https://www.frontendmentor.io/solutions/coding-bootcamp-testimonials-slider-scss-javascript-postcss-ZoEh67LMIf)
+- [Live Site](https://hassaneljebyly.github.io/coding-bootcamp-testimonials-slider/public/)
 
 ### Built with
 
